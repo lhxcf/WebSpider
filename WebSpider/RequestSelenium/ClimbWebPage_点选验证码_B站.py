@@ -1,8 +1,8 @@
 from selenium import webdriver
-from chaojiying import Chaojiying_Client
+from RequestSelenium.chaojiying import Chaojiying_Client
 from selenium.webdriver.common.by import By
 import time
-
+# 超级鹰账号要更换，换位自己的账号
 # 访问网址
 browser = webdriver.Chrome()
 url = 'https://passport.bilibili.com/login'
