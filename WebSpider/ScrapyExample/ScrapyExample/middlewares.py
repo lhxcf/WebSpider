@@ -1,5 +1,9 @@
+# 引入相应的库
+
 from selenium import webdriver
 import time
+from scrapy.http import  HtmlResponse
+from selenium.webdriver.common.by import By
 
 # Define here the models for your spider middleware
 #
@@ -71,6 +75,9 @@ class ScrapyexampleDownloaderMiddleware:
         s = cls()
         crawler.signals.connect(s.spider_opened, signal=signals.spider_opened)
         return s
+    # 使用selenium库爬取的代码
+    # def __int__(self):
+    #     self.browser = webdriver.Chrome()
 
     def process_request(self, request, spider):
         # Called for each request that goes through the downloader
@@ -83,7 +90,7 @@ class ScrapyexampleDownloaderMiddleware:
         # - or raise IgnoreRequest: process_exception() methods of
         #   installed downloader middleware will be called
 
-
+        # ip代理代码块
         # proxy = requests.get('http://webapi.http.zhimacangku.com/getip?num=1&type=3&pro=&city=0&yys=0&port=1&time=1&'
         #                      'ts=0&ys=0&cs=0&lb=1&sb=0&pb=4&mr=1&regions=').text
         # proxy = proxy.strip()
@@ -92,8 +99,27 @@ class ScrapyexampleDownloaderMiddleware:
         # request.meta['proxy'] = proxies
         # time.sleep(4)
 
-        browser = webdriver.Chrome()
-        browser.get()
+        # Cookies模拟登录
+        # 修改浏览器配置
+        # options = webdriver.ChromeOptions()
+        # options.add_argument("--disable-blink-features=AutomationControlled")
+        # browser = webdriver.Chrome(options=options)
+        #
+        # browser.get('https://login.taobao.com/member/login.jhtml?spm=a21bo.jianhua.754894437.1.5af911d9AfQQs6&'
+        #             'f=top&redirectURL=https%3A%2F%2Fwww.taobao.com%2F')
+        # browser.find_element(By.XPATH, '//*[@id="fm-login-id"]').send_keys('17535691556')
+        # browser.find_element(By.XPATH, '//*[@id="fm-login-password"]').send_keys('479823365c')
+        # browser.find_element(By.XPATH, '//*[@id="login-form"]/div[4]/button').click()
+        # time.sleep(7)
+        # cookies = browser.get_cookies()
+        # request.cookies = cookies
+        # browser.quit()
+
+        # 使用selenium库爬取的代码
+        # self.browser.get(request.url)
+        # time.sleep(2)
+        # body = self.browser.page_source
+        # return HtmlResponse(self.browser.current_url, body=body, encoding='utf-8', request=request)
         return None
 
     def process_response(self, request, response, spider):

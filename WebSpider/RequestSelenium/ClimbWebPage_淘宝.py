@@ -58,6 +58,7 @@ for i in range(page_no):
         time.sleep(2)
         action.move_by_offset(258, 0)
         action.release().perform()
+
     print(res)
     # 正则表达式提取数据
     title = re.findall('"raw_title":"(.*?)"', res)
