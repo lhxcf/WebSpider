@@ -21,7 +21,7 @@ browser.find_element(By.XPATH, '//*[@id="fm-login-password"]').send_keys('479823
 browser.find_element(By.XPATH, '//*[@id="login-form"]/div[4]/button').click()
 time.sleep(10)
 cookies = browser.get_cookies()
-
+browser.quit()
 # 修改cookies数据格式
 cookies_dict = {}
 for item in cookies:
@@ -52,12 +52,7 @@ for i in range(page_no):
 
     # 模拟通过滑块验证码验证
     if '霸下通用 web 页面-验证码' in res:
-        sliders = browser.find_element(By.XPATH, '//*[@id="nc_1_n1z"]')
-        action = webdriver.ActionChains(browser)
-        action.click_and_hold(sliders).perform()
-        time.sleep(2)
-        action.move_by_offset(258, 0)
-        action.release().perform()
+        continue
 
     print(res)
     # 正则表达式提取数据
