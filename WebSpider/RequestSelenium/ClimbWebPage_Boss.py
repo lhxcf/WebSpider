@@ -10,7 +10,7 @@ from selenium.webdriver.common.by import By
 import pandas as pd
 import threading
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-                         'Chrome/110.0.0.0 Safari/537.36'}
+                         'Chrome/112.0.0.0 Safari/537.36'}
 page_number = 10    # 要获取的页数
 post_name = 'python'    # 职位名称
 city_code = '101230100'    # 城市代码，需自行进入网站地址栏查看填写，否则不要改动
@@ -101,4 +101,5 @@ if __name__ == '__main__':
         t.join()
     end_time = time.time()
     print(f'\n爬取共用时：{round(end_time - start_time, 2)}秒')
+
 

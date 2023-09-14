@@ -10,7 +10,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/
                          'Chrome/110.0.0.0 Safari/537.36'}
 
 
-def crawl(company):    # 注意元祖传参是用*company,字典传参使用**company
+def crawl(company):    # 注意元组传参是用*company,字典传参使用**company
     url = 'https://cn.bing.com/search?q=' + company
     res = requests.get(url, headers=headers, timeout=10).text
     print(res)
