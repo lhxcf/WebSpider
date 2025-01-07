@@ -8,14 +8,14 @@ import random
 import requests
 
 
-n = 20  # 题目数量
-y = 65  # 要填写的份数
-duo = [-1]  # 多选题序号
+n = 17  # 题目数量
+y = 200  # 要填写的份数
+duo = [5, 7, 8, 15, 17]  # 多选题序号(不选选项的最后一项)
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                          'Chrome/110.0.0.0 Safari/537.36'}
 
-url = 'https://www.wjx.cn/vm/PpHRKZn.aspx#'
+url = 'https://www.wjx.cn/vm/PpFsdWc.aspx'
 options = webdriver.ChromeOptions()
 options.add_argument("--disable-blink-features=AutomationControlled")
 browser = webdriver.Chrome(options=options)
@@ -30,9 +30,9 @@ for i_ in range(y):
     browser.get(url)
     res = browser.page_source
     for i in range(1, n+1):
-        select = re.findall(rf'div class="label" for="q{i}_(.*?)"', res)
+        select = re.findall(rf'div class="label"[^>]*for="q{i}_(.*?)"', res)
         if i in duo:
-            len_ = len(select) - 1
+            len_ = len(select) - 2
         else:
             len_ = len(select)
         try:
@@ -46,16 +46,22 @@ for i_ in range(y):
         # browser.find_element(By.XPATH, f'//*[@id="div{i}"]/div[2]/div[{x}]/div').click()
     print(i_)
     browser.find_element(By.XPATH, f'//*[@id="ctlNext"]').click()
-    time.sleep(0.3)
+    # time.sleep(0.3)
+    time.sleep(0.5)
     try:
+        # browser.find_element(By.CLASS_NAME, 'rect-bottom').click()
         browser.find_element(By.CLASS_NAME, 'layui-layer-btn0').click()
+    except:
+        pass
+    try:
         browser.find_element(By.CLASS_NAME, 'sm-ico-wave').click()
         time.sleep(3)
-
+    except:
+        pass
+    try:
         action = webdriver.ActionChains(browser)
         button = browser.find_element(By.ID, 'nc_1_n1z')
         action.drag_and_drop_by_offset(button, 338, 0).perform()
-
     except:
         pass
     # browser.close()
